@@ -5,7 +5,7 @@
       "fields": {
         "title": "محصول اول",
         "price": 89,
-        "image": { "fields": { "file": { "url": "./images/product-1.jpg" } } }
+        "image": { "fields": { "file": { "url": "./images/product-1.jpeg" } } }
       }
     },
     {
@@ -13,7 +13,7 @@
       "fields": {
         "title": "محصول دوم",
         "price": 29,
-        "image": { "fields": { "file": { "url": "./images/product-2.jpg" } } }
+        "image": { "fields": { "file": { "url": "./images/product-2.jpeg" } } }
       }
     },
     {
@@ -21,7 +21,7 @@
       "fields": {
         "title": "محصول سوم",
         "price": 79,
-        "image": { "fields": { "file": { "url": "./images/product-3.jpg" } } }
+        "image": { "fields": { "file": { "url": "./images/product-3.jpeg" } } }
       }
     },
     {
@@ -29,7 +29,7 @@
       "fields": {
         "title": "محصول چهارم",
         "price": 99,
-        "image": { "fields": { "file": { "url": "./images/product-4.jpg" } } }
+        "image": { "fields": { "file": { "url": "./images/product-4.jpeg" } } }
       }
     },
     {
@@ -37,7 +37,7 @@
       "fields": {
         "title": "محصول پنجم",
         "price": 49,
-        "image": { "fields": { "file": { "url": "./images/product-5.jpg" } } }
+        "image": { "fields": { "file": { "url": "./images/product-5.jpeg" } } }
       }
     },
     {
@@ -45,7 +45,7 @@
       "fields": {
         "title": "محصول ششم",
         "price": 59,
-        "image": { "fields": { "file": { "url": "./images/product-6.jpg" } } }
+        "image": { "fields": { "file": { "url": "./images/product-6.jpeg" } } }
       }
     },
     {
@@ -53,7 +53,7 @@
       "fields": {
         "title": "محصول هفتم",
         "price": 99,
-        "image": { "fields": { "file": { "url": "./images/product-7.jpg" } } }
+        "image": { "fields": { "file": { "url": "./images/product-7.jpeg" } } }
       }
     },
     {
@@ -61,7 +61,7 @@
       "fields": {
         "title": "محصول هشتم",
         "price": 49,
-        "image": { "fields": { "file": { "url": "./images/product-8.jpg" } } }
+        "image": { "fields": { "file": { "url": "./images/product-8.jpeg" } } }
       }
     }
   ]

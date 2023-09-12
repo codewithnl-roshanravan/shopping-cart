@@ -6,6 +6,8 @@ const cartDOM = document.querySelector('.cart')
 const cartOverlay = document.querySelector('.cart-overlay')
 const cartBtn = document.querySelector('.cart-btn')
 const closeCartBtn = document.querySelector('.close-cart')
+const clearCartBtn = document.querySelector('.clear-cart')
+const store = document.querySelector('button')
 
 let cart = []
 
@@ -86,8 +88,6 @@ class View {
 
     cartTotal.innerText = totalPrice
     cartItems.innerText = totalItems
-
-    console.log(cartTotal, cartItems)
   }
 
   addCartItem(item) {
@@ -99,12 +99,12 @@ class View {
     <div>
       <h4>${item.title}</h4>
       <h5>${item.price}</h5>
-      <span class="remove-item">حذف</span>
+      <span class="remove-item" data-id=${item.id}>حذف</span>
     </div>
     <div>
-      <i class="fas-fa-chevron-up"></i>
+      <i class="fas fa-chevron-up" data-id=${item.id}></i>
       <p class="item-amount">${item.amount}</p>
-      <i class="fas-fa-chevron-down"></i>
+      <i class="fas fa-chevron-down" data-id=${item.id}></i>
     </div>
     `
     cartContent.appendChild(div)
@@ -134,6 +134,82 @@ class View {
   hideCart() {
     cartOverlay.classList.remove('transparentBcg')
     cartDOM.classList.remove('showCart')
+  }
+
+  cartProcess() {
+    clearCartBtn.addEventListener('click', () => {
+      this.clearCart()
+    })
+
+    cartContent.addEventListener('click', (event) => {
+      if (event.target.classList.contains('remove-item')) {
+        let removeItem = event.target
+        let id = removeItem.dataset.id
+
+        cartContent.removeChild(removeItem.parentElement.parentElement)
+
+        this.removeProduct(id)
+      }
+
+      if (event.target.classList.contains('fa-chevron-up')) {
+        let addAmount = event.target
+        let id = addAmount.dataset.id
+
+        let product = cart.find((item) => {
+          return item.id === id
+        })
+
+        product.amount = product.amount + 1
+
+        Storage.saveCart(cart)
+        this.setCartValues(cart)
+
+        addAmount.nextElementSibling.innerText = product.amount
+      }
+
+      if (event.target.classList.contains('fa-chevron-down')) {
+        let lowerAmount = event.target
+        let id = lowerAmount.dataset.id
+
+        let product = cart.find((item) => {
+          return item.id === id
+        })
+
+        product.amount = product.amount - 1
+
+        if (product.amount > 0) {
+          Storage.saveCart(cart)
+          this.setCartValues(cart)
+          lowerAmount.previousElementSibling.innerText = product.amount
+        } else {
+          cartContent.removeChild(lowerAmount.parentElement.parentElement)
+          this.removeProduct(id)
+        }
+      }
+    })
+  }
+
+  clearCart() {
+    let cartItems = cart.map((item) => {
+      return item.id
+    })
+
+    cartItems.forEach((item) => {
+      return this.removeProduct(item)
+    })
+
+    while (cartContent.children.length > 0) {
+      cartContent.removeChild(cartContent.children[0])
+    }
+  }
+
+  removeProduct(id) {
+    cart = cart.filter((item) => {
+      return item.id !== id
+    })
+
+    this.setCartValues(cart)
+    Storage.saveCart(cart)
   }
 }
 
@@ -173,5 +249,6 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .then(() => {
       view.getCartButtons()
+      view.cartProcess()
     })
 })
